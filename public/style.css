@@ -5,6 +5,10 @@ body {
   text-align: center;
 }
 
+h2 {
+  color: #003366;
+}
+
 .mainContent {
   text-align: center;
 }
@@ -14,7 +18,7 @@ body {
 }
 
 .btn {
-  background-color: #cb9767;
+  background-color: #003366;
   margin: 2px;
   border: none;
   border-radius: 20%;
@@ -26,16 +30,6 @@ body {
 
 .btn:hover {
   background-color: #c48a54;
-}
-
-.allBooks {
-  width: 60%;
-  margin-top: 20px;
-  padding: 0px;
-}
-
-.oneBook {
-  padding: 4px;
 }
 
 .bookInput {
@@ -74,6 +68,7 @@ body {
 
 .notLoggedInMsg {
   display: inline;
+  color: #003366;
 }
 
 .signupArea {
@@ -85,15 +80,14 @@ body {
   position: relative;
 }
 
-.logOutBtn {
-  background-color: #cb9767;
-  margin: 2px;
-  border: none;
-  border-radius: 20%;
-  color: #f8f2ec;
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
+.logout {
+  float: left;
+  margin: 30px;
+}
+
+.create {
+  float: left;
+  margin: 30px;
 }
 
 .lastInput {
@@ -112,6 +106,40 @@ body {
   font-size: 2em;
 }
 
-.td-invisible {
-  visibility: hidden;
+/*Table design */
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.tbl-header {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.tbl-content {
+  height: 300px;
+  overflow-x: auto;
+  margin-top: 0px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+th {
+  padding: 20px 15px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 20px;
+  color: #003366;
+  text-transform: uppercase;
+}
+td {
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 18px;
+  color: #003366;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
 }

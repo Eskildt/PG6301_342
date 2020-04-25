@@ -33,9 +33,9 @@ export class Create extends React.Component {
       <div>
         <h3>Create a New Recipe</h3>
         <Recipe
-          author={''}
-          title={''}
-          year={''}
+          chef={''}
+          meal={''}
+          day={''}
           ok={'Create'}
           okCallback={this.onOk}
         />

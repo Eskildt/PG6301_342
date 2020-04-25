@@ -92,9 +92,9 @@ export class Edit extends React.Component {
       <div>
         <h3>Edit Recipe</h3>
         <Recipe
-          author={this.state.recipe.author}
-          title={this.state.recipe.title}
-          year={this.state.recipe.year}
+          chef={this.state.recipe.chef}
+          meal={this.state.recipe.meal}
+          day={this.state.recipe.day}
           recipeId={this.recipeId}
           ok={'Update'}
           okCallback={this.onOk}

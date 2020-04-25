@@ -30,9 +30,9 @@ class HeaderBar extends React.Component {
   renderLoggedIn(userId) {
     return (
       <div className='header'>
-        <h3 className='notLoggedInMsg'>Welcome {userId}</h3>
+        <h3 className='notLoggedInMsg'>Welcome Chef {userId}</h3>
 
-        <div className='btnPart' onClick={this.doLogout}>
+        <div className='logout btn' onClick={this.doLogout}>
           Logout
         </div>
       </div>
@@ -68,7 +68,7 @@ class HeaderBar extends React.Component {
     return (
       <div className={'headerBar'}>
         <Link className='home btn' to={'/'}>
-          Home
+          <i class='fas fa-home'></i>
         </Link>
         {content}
       </div>

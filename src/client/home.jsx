@@ -14,6 +14,10 @@ export class Home extends React.Component {
 
   componentDidMount() {
     this.fetchRecipes();
+
+    if (this.props.userId) {
+      this.props.updateLoggedInUserId;
+    }
   }
 
   async fetchRecipes() {
@@ -68,23 +72,9 @@ export class Home extends React.Component {
     return true;
   };
 
-  renderLoggedIn(r, userId) {
-    return;
-  }
-
-  renderNotLoggedIn() {
-    return 'td-invisible';
-  }
-
   render() {
-    const userId = this.props.userId;
+    const user = this.props.userId;
     let table;
-    let content;
-    if (!userId) {
-      content = this.renderNotLoggedIn();
-    } else {
-      content = this.renderLoggedIn(userId);
-    }
 
     if (this.state.error !== null) {
       table = <p>{this.state.error}</p>;
@@ -92,40 +82,49 @@ export class Home extends React.Component {
       table = <p>There is no recipe registered in the database</p>;
     } else {
       table = (
-        <div>
-          <div className='mainContent'>{table}</div>
-          <table className='allBooks'>
+        <div className='tbl-header'>
+          <table cellpadding='0' cellspacing='0' border='0'>
             <thead>
               <tr>
                 <th>Chef(s)</th>
                 <th>Meal</th>
                 <th>Day</th>
-                <th className='td-invisible'>Options</th>
+                {user ? <th>Options</th> : <p></p>}
               </tr>
             </thead>
             <tbody>
               {this.state.recipes.map((r) => (
-                <tr key={'key_' + r.id} className='oneBook'>
+                <tr key={'key_' + r.id}>
                   <td>{r.chef}</td>
                   <td>{r.meal}</td>
                   <td>{r.day}</td>
-
-                  <td className={content}>
-                    <Link to={'/edit?recipeId=' + r.id}>
-                      <button className='btn'>
-                        <i className='fas fa-edit'></i>
+                  {user ? (
+                    <td>
+                      <Link to={'/edit?recipeId=' + r.id}>
+                        <button className='btn'>
+                          <i className='fas fa-edit'></i>
+                        </button>
+                      </Link>
+                      <button
+                        className='btn'
+                        onClick={(_) => this.deleteRecipe(r.id)}>
+                        <i className='fas fa-trash'></i>
                       </button>
-                    </Link>
-                    <button
-                      className='btn'
-                      onClick={(_) => this.deleteRecipe(r.id)}>
-                      <i className='fas fa-trash'></i>
-                    </button>
-                  </td>
+                    </td>
+                  ) : (
+                    <td></td>
+                  )}
                 </tr>
               ))}
             </tbody>
           </table>
+          {user ? (
+            <Link to={'/create'}>
+              <button className='btn create'>New Receipe</button>
+            </Link>
+          ) : (
+            <p></p>
+          )}
         </div>
       );
     }
@@ -137,9 +136,7 @@ export class Home extends React.Component {
           updateLoggedInUserId={this.props.updateLoggedInUserId}
         />
         <h2>This Week's Meal List</h2>
-        <Link to={'/create'}>
-          <button className='btn'>New</button>
-        </Link>
+
         {table}
       </div>
     );
