@@ -1,11 +1,76 @@
 const express = require('express');
-const repository = require('./repository');
+const repository = require('./recipeRepository');
 const bodyParser = require('body-parser');
 const path = require('path');
+const LocalStrategy = require('passport-local').Strategy;
+const cors = require('cors');
+const routes = require('./routes');
+const passport = require('passport');
+const session = require('express-session');
+const Repository = require('./userRepository');
 
 const app = express();
 
+if (false) {
+  console.log('Using CORS to allow all origins');
+  app.use(cors());
+}
+
 app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    secret: 'a secret used to encrypt the session cookies',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(express.static('public'));
+
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'userId',
+      passwordField: 'password',
+    },
+    function (userId, password, done) {
+      const ok = Repository.verifyUser(userId, password);
+
+      if (!ok) {
+        return done(null, false, { message: 'Invalid username/password' });
+      }
+
+      const user = Repository.getUser(userId);
+      return done(null, user);
+    }
+  )
+);
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+  const user = Repository.getUser(id);
+
+  if (user) {
+    done(null, user);
+  } else {
+    done(null, false);
+  }
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/', routes);
 
 app.get('/api/recipes', (req, res) => {
   const since = req.query['since'];
@@ -69,8 +134,6 @@ app.all('/api*', (req, res) => {
   res.status(404);
   res.send();
 });
-
-app.use(express.static('public'));
 
 app.use((req, res, next) => {
   res.sendFile(path.resolve(__dirname, '..', '..', 'public', 'index.html'));

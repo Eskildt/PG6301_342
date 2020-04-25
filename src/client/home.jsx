@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import HeaderBar from './headerbar';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -67,8 +68,23 @@ export class Home extends React.Component {
     return true;
   };
 
+  renderLoggedIn(r, userId) {
+    return;
+  }
+
+  renderNotLoggedIn() {
+    return 'td-invisible';
+  }
+
   render() {
+    const userId = this.props.userId;
     let table;
+    let content;
+    if (!userId) {
+      content = this.renderNotLoggedIn();
+    } else {
+      content = this.renderLoggedIn(userId);
+    }
 
     if (this.state.error !== null) {
       table = <p>{this.state.error}</p>;
@@ -77,13 +93,14 @@ export class Home extends React.Component {
     } else {
       table = (
         <div>
+          <div className='mainContent'>{table}</div>
           <table className='allBooks'>
             <thead>
               <tr>
                 <th>Chef(s)</th>
                 <th>Meal</th>
                 <th>Day</th>
-                <th>Options</th>
+                <th className='td-invisible'>Options</th>
               </tr>
             </thead>
             <tbody>
@@ -92,7 +109,8 @@ export class Home extends React.Component {
                   <td>{r.chef}</td>
                   <td>{r.meal}</td>
                   <td>{r.day}</td>
-                  <td>
+
+                  <td className={content}>
                     <Link to={'/edit?recipeId=' + r.id}>
                       <button className='btn'>
                         <i className='fas fa-edit'></i>
@@ -114,6 +132,10 @@ export class Home extends React.Component {
 
     return (
       <div>
+        <HeaderBar
+          userId={this.props.userId}
+          updateLoggedInUserId={this.props.updateLoggedInUserId}
+        />
         <h2>This Week's Meal List</h2>
         <Link to={'/create'}>
           <button className='btn'>New</button>

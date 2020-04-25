@@ -5,6 +5,10 @@ body {
   text-align: center;
 }
 
+.mainContent {
+  text-align: center;
+}
+
 #root {
   margin: 30px;
 }
@@ -44,4 +48,70 @@ body {
 .inputTitle {
   color: #85582e;
   display: inline;
+}
+
+.headerBar {
+  margin-top: 30px;
+}
+
+.btnPart {
+  float: right;
+  margin: 30px;
+}
+
+.home {
+  float: left;
+  margin: 30px;
+}
+
+.msgDiv {
+  display: inline-flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+}
+
+.notLoggedInMsg {
+  display: inline;
+}
+
+.signupArea {
+  width: 100px;
+  padding-top: 50px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.logOutBtn {
+  background-color: #cb9767;
+  margin: 2px;
+  border: none;
+  border-radius: 20%;
+  color: #f8f2ec;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.lastInput {
+  margin-bottom: 5px;
+}
+
+.transBtn {
+  font-size: 1em;
+  padding: 5px;
+  margin: 5px;
+  width: 115px;
+}
+
+.errorMsg {
+  color: red;
+  font-size: 2em;
+}
+
+.td-invisible {
+  visibility: hidden;
 }

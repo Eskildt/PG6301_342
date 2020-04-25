@@ -27,7 +27,7 @@ class Recipe extends React.Component {
     if (completed) {
       this.props.history.push('/');
     } else {
-      alert('Failed to create new Recipe');
+      alert('Failed to create new recipe');
     }
   };
 
@@ -61,7 +61,7 @@ class Recipe extends React.Component {
             onChange={this.onMealChange}
             className='bookInput'
           />
-          <div className='inputTitle'>Year:</div>
+          <div className='inputTitle'>Day:</div>
           <input
             placeholder={'Type the day for this meal.'}
             value={this.state.day}

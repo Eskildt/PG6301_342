@@ -13,7 +13,7 @@ export class Edit extends React.Component {
     this.recipeId = new URLSearchParams(window.location.search).get('recipeId');
 
     if (this.recipeId === null) {
-      this.state.error = 'Unspecified book id';
+      this.state.error = 'Unspecified recipe id';
     }
   }
 
