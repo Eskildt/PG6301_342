@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
-class HeaderBar extends React.Component {
+export class HeaderBar extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -14,12 +14,14 @@ class HeaderBar extends React.Component {
     try {
       response = await fetch(url, { method: 'post' });
     } catch (err) {
-      alert('Failed to connect to server: ' + err);
+      console.log('Failed to connect to server: ' + err);
       return;
     }
 
     if (response.status !== 204) {
-      alert('Error when connecting to server: status code ' + response.status);
+      console.log(
+        'Error when connecting to server: status code ' + response.status
+      );
       return;
     }
 
@@ -32,7 +34,7 @@ class HeaderBar extends React.Component {
       <div className='header'>
         <h3 className='notLoggedInMsg'>Welcome Chef {userId}</h3>
 
-        <div className='logout btn' onClick={this.doLogout}>
+        <div className='logout btn' onClick={this.doLogout} id='logoutBtnId'>
           Logout
         </div>
       </div>
@@ -68,7 +70,7 @@ class HeaderBar extends React.Component {
     return (
       <div className={'headerBar'}>
         <Link className='home btn' to={'/'}>
-          <i class='fas fa-home'></i>
+          <i className='fas fa-home'></i>
         </Link>
         {content}
       </div>

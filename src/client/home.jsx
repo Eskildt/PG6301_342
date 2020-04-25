@@ -83,13 +83,17 @@ export class Home extends React.Component {
     } else {
       table = (
         <div className='tbl-header'>
-          <table cellpadding='0' cellspacing='0' border='0'>
+          <table
+            cellPadding='0'
+            cellSpacing='0'
+            border='0'
+            className='allBooks'>
             <thead>
               <tr>
                 <th>Chef(s)</th>
                 <th>Meal</th>
                 <th>Day</th>
-                {user ? <th>Options</th> : <p></p>}
+                {user ? <th>Options</th> : <React.Fragment></React.Fragment>}
               </tr>
             </thead>
             <tbody>
@@ -123,7 +127,7 @@ export class Home extends React.Component {
               <button className='btn create'>New Receipe</button>
             </Link>
           ) : (
-            <p></p>
+            <React.Fragment></React.Fragment>
           )}
         </div>
       );

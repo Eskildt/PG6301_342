@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderBar from './headerbar';
 import { withRouter } from 'react-router-dom';
 
-class SignUp extends React.Component {
+export class SignUp extends React.Component {
   constructor(props) {
     super(props);
 
@@ -99,6 +99,7 @@ class SignUp extends React.Component {
               type='text'
               value={this.state.userId}
               onChange={this.onUserIdChange}
+              id='userIdInput'
             />
           </div>
           <div>
@@ -107,6 +108,7 @@ class SignUp extends React.Component {
               type='password'
               value={this.state.password}
               onChange={this.onPasswordChange}
+              id='passwordInput'
             />
           </div>
           <div>
@@ -115,11 +117,12 @@ class SignUp extends React.Component {
               type='password'
               value={this.state.confirm}
               onChange={this.onConfirmChange}
+              id='confirmInput'
             />
             <div>{confirmMsg}</div>
           </div>
           {error}
-          <div className='btn' onClick={this.doSignUp}>
+          <div className='btn' onClick={this.doSignUp} id='signUpBtn'>
             Sign Up
           </div>
         </div>

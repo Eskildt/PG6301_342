@@ -27,9 +27,13 @@ function createUser(id, password) {
   users.set(id, user);
   return true;
 }
+function resetAllUsers() {
+  users.clear();
+}
 
 module.exports = {
   verifyUser,
   createUser,
   getUser,
+  resetAllUsers,
 };
