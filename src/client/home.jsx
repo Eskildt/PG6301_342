@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 import HeaderBar from './headerbar';
 
 export class Home extends React.Component {
@@ -109,6 +109,7 @@ export class Home extends React.Component {
                           <i className='fas fa-edit'></i>
                         </button>
                       </Link>
+
                       <button
                         className='btn'
                         onClick={(_) => this.deleteRecipe(r.id)}>
@@ -142,6 +143,7 @@ export class Home extends React.Component {
         <h2>This Week's Meal List</h2>
 
         {table}
+
         <Link to={'/chat'}>
           <button className='btn'>Chat</button>
         </Link>

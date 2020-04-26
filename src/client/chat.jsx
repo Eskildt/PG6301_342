@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Route, BrowserRouter } from 'react-router-dom';
 import { HeaderBar } from './headerbar';
 
 export class Chat extends React.Component {
@@ -128,6 +128,7 @@ export class Chat extends React.Component {
     return (
       <React.Fragment>
         <HeaderBar />
+
         <div className='chatDiv'>
           <h2>Customer Chat</h2>
           <div>

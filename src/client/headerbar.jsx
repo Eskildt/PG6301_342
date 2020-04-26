@@ -72,6 +72,7 @@ export class HeaderBar extends React.Component {
         <Link className='home btn' to={'/'}>
           <i className='fas fa-home'></i>
         </Link>
+
         {content}
       </div>
     );
