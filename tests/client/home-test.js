@@ -3,14 +3,11 @@ const { mount } = require('enzyme');
 const { MemoryRouter } = require('react-router-dom');
 
 const { Home } = require('../../src/client/home');
-const {
-  stubFetch,
-  flushPromises,
-  overrideFetch,
-  asyncCheckCondition,
-} = require('../mytest-utils');
+const { stubFetch, flushPromises, overrideFetch } = require('../mytest-utils');
+const { asyncCheckCondition } = require('../mytest-utils');
+
 const rep = require('../../src/server/recipeRepository');
-const app = require('../../src/server/app');
+const { app } = require('../../src/server/app');
 
 test('Test failed fetch', async () => {
   /*
@@ -57,7 +54,7 @@ test('Test display 1 recipe using stub', async () => {
   expect(html).toMatch(meal);
 });
 
-test('Test display books using SuperTest', async () => {
+test('Test display recipes using SuperTest', async () => {
   /*
         when testing the component here, we actually run the backend as well.
         but "fetch" does not exist in NodeJS when running this test.
@@ -111,3 +108,5 @@ test('Test display books using SuperTest', async () => {
     expect(html).toMatch(recipes[i].meal);
   }
 });
+
+/* Chat test */

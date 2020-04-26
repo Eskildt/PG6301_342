@@ -9,6 +9,7 @@ import { NotFound } from './not_found';
 
 import Login from './login';
 import SignUp from './signup';
+import { Chat } from './chat';
 
 export class App extends React.Component {
   constructor(props) {
@@ -63,6 +64,18 @@ export class App extends React.Component {
                 />
               )}
             />
+            <Route
+              exact
+              path='/chat'
+              render={(props) => (
+                <Chat
+                  {...props}
+                  userId={this.state.userId}
+                  updateLoggedInUserId={this.updateLoggedInUserId}
+                />
+              )}
+            />
+
             <Route component={NotFound} />
           </Switch>
         </div>

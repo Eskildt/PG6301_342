@@ -24,7 +24,6 @@ function fillForm(driver, id, password) {
 
   loginBtn.simulate('click');
 }
-/*
 
 test('Test fail login', async () => {
   overrideFetch(app);
@@ -48,7 +47,6 @@ test('Test fail login', async () => {
 
   expect(error).toEqual(true);
 });
-/*
 
 test('Test valid login', async () => {
   const userId = 'Foo';
@@ -57,7 +55,7 @@ test('Test valid login', async () => {
 
   overrideFetch(app);
 
-  const fetchAndUpdateUserInfo = () => new Promise((resolve) => resolve());
+  const updateLoggedInUserId = () => new Promise((resolve) => resolve());
   let page = null;
   const history = {
     push: (h) => {
@@ -67,10 +65,7 @@ test('Test valid login', async () => {
 
   const driver = mount(
     <MemoryRouter initialEntries={['/signup']}>
-      <Login
-        fetchAndUpdateUserInfo={fetchAndUpdateUserInfo}
-        history={history}
-      />
+      <Login updateLoggedInUserId={updateLoggedInUserId} history={history} />
     </MemoryRouter>
   );
 
@@ -85,4 +80,4 @@ test('Test valid login', async () => {
   );
 
   expect(redirected).toEqual(true);
-}); */
+});

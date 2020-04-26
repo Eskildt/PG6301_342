@@ -121,14 +121,14 @@ export class Home extends React.Component {
                 </tr>
               ))}
             </tbody>
+            {user ? (
+              <Link to={'/create'}>
+                <button className='btn create'>New Receipe</button>
+              </Link>
+            ) : (
+              <React.Fragment></React.Fragment>
+            )}
           </table>
-          {user ? (
-            <Link to={'/create'}>
-              <button className='btn create'>New Receipe</button>
-            </Link>
-          ) : (
-            <React.Fragment></React.Fragment>
-          )}
         </div>
       );
     }
@@ -142,6 +142,9 @@ export class Home extends React.Component {
         <h2>This Week's Meal List</h2>
 
         {table}
+        <Link to={'/chat'}>
+          <button className='btn'>Chat</button>
+        </Link>
       </div>
     );
   }
