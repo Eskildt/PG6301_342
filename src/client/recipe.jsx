@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { HeaderBar } from './headerbar';
 
-class Recipe extends React.Component {
+export class Recipe extends React.Component {
   constructor(props) {
     super(props);
 
@@ -53,6 +54,7 @@ class Recipe extends React.Component {
             value={this.state.chef}
             onChange={this.onChefChange}
             className='bookInput'
+            id='recipeInputChef'
           />
           <div className='inputTitle'>Meal:</div>
           <input
@@ -60,6 +62,7 @@ class Recipe extends React.Component {
             value={this.state.meal}
             onChange={this.onMealChange}
             className='bookInput'
+            id='recipeInputMeal'
           />
           <div className='inputTitle'>Day:</div>
           <input
@@ -68,8 +71,7 @@ class Recipe extends React.Component {
             onChange={this.onDayChange}
             className='bookInput'
           />
-
-          <button type='submit' className={'btn'}>
+          <button type='submit' className={'btn'} id='recipeInputBtn'>
             {this.ok}
           </button>
           <Link to={'/'}>

@@ -27,6 +27,20 @@ function fillForm(driver, id, password, confirm) {
   signUpBtn.simulate('click');
 }
 
+test('Test can render form', () => {
+  const driver = mount(
+    <MemoryRouter>
+      <SignUp />
+    </MemoryRouter>
+  );
+
+  const forms = driver.find('#userIdInput');
+  expect(forms.length).toEqual(1);
+
+  const btns = driver.find('#signUpBtn');
+  expect(btns.length).toEqual(1);
+});
+
 test('Test password mismatch', async () => {
   const mismatch = 'Not matching';
 

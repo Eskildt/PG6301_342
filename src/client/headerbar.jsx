@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink, Link, withRouter } from 'react-router-dom';
 
 export class HeaderBar extends React.Component {
   constructor(props) {
@@ -46,12 +46,12 @@ export class HeaderBar extends React.Component {
       <div className='header'>
         <div className='notLoggedInMsg'>You are not logged in</div>
         <div className='btnPart'>
-          <Link className='btn' to='/login'>
+          <NavLink className='btn' to='/login'>
             LogIn
-          </Link>
-          <Link className='btn' to='/signup'>
+          </NavLink>
+          <NavLink className='btn' to='/signup'>
             SignUp
-          </Link>
+          </NavLink>
         </div>
       </div>
     );
@@ -69,9 +69,9 @@ export class HeaderBar extends React.Component {
 
     return (
       <div className={'headerBar'}>
-        <Link className='home btn' to={'/'}>
+        <NavLink className='home btn' to={'/'}>
           <i className='fas fa-home'></i>
-        </Link>
+        </NavLink>
 
         {content}
       </div>

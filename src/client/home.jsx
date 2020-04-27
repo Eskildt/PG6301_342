@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeaderBar from './headerbar';
+import Chat from './chat';
 
 export class Home extends React.Component {
   constructor(props) {
@@ -143,10 +144,7 @@ export class Home extends React.Component {
         <h2>This Week's Meal List</h2>
 
         {table}
-
-        <Link to={'/chat'}>
-          <button className='btn'>Chat</button>
-        </Link>
+        <Chat />
       </div>
     );
   }

@@ -11,9 +11,9 @@ const { app } = require('../../src/server/app');
 
 test('Test failed fetch', async () => {
   /*
-        in this case, we stub the fetch, by explicitly stating what to return when the component runs.
-        the backend is not run in this test.
-     */
+            in this case, we stub the fetch, by explicitly stating what to return when the component runs.
+            the backend is not run in this test.
+         */
 
   stubFetch(500, {}, null);
 
@@ -36,7 +36,7 @@ test('Test display 1 recipe using stub', async () => {
 
   stubFetch(
     200,
-    [{ id: 0, chef: 'Princess Peach', meal: meal, day: 'Sunday' }],
+    [{ id: 0, chef: 'Princess Peach', meal: 'Ultra Mushroom', day: 'Sunday' }],
     (url) => url.endsWith('/api/recipes')
   );
 
@@ -56,19 +56,19 @@ test('Test display 1 recipe using stub', async () => {
 
 test('Test display recipes using SuperTest', async () => {
   /*
-        when testing the component here, we actually run the backend as well.
-        but "fetch" does not exist in NodeJS when running this test.
-        so, we override it by making actual HTTP calls toward the backend.
-        To do that, we use the same library to test the HTTP endpoints directly,
-        ie, SuperTest.
-        Advantages:
-        - no need to mock responses, as using real backend
-        - testing "more", as here we can find bugs as well in the backend
-        Disadvantages:
-        - need to run backend as well, which makes tests slower
-        - running backends is not always as easy as here, as they might require
-          to configure external services like databases
-     */
+            when testing the component here, we actually run the backend as well.
+            but "fetch" does not exist in NodeJS when running this test.
+            so, we override it by making actual HTTP calls toward the backend.
+            To do that, we use the same library to test the HTTP endpoints directly,
+            ie, SuperTest.
+            Advantages:
+            - no need to mock responses, as using real backend
+            - testing "more", as here we can find bugs as well in the backend
+            Disadvantages:
+            - need to run backend as well, which makes tests slower
+            - running backends is not always as easy as here, as they might require
+              to configure external services like databases
+         */
 
   rep.initWithSomeRecipes();
   overrideFetch(app);
@@ -80,13 +80,13 @@ test('Test display recipes using SuperTest', async () => {
   );
 
   /*
-        unfortunately, flushPromises does not work here, as it has limitations.
-        so we need something more sophisticated and robust, like asyncCheckCondition.
-        The idea is to define a predicate, and check it at certain regular intervals,
-        up to a max amount of time (eg, few seconds).
-        When we do an action, we then expect to see the results (by checking
-        a predicate) sometime in the future, but not too long.
-     */
+            unfortunately, flushPromises does not work here, as it has limitations.
+            so we need something more sophisticated and robust, like asyncCheckCondition.
+            The idea is to define a predicate, and check it at certain regular intervals,
+            up to a max amount of time (eg, few seconds).
+            When we do an action, we then expect to see the results (by checking
+            a predicate) sometime in the future, but not too long.
+         */
   //await flushPromises();
 
   //let's check if table is displayed within a certain amount of time
@@ -108,5 +108,3 @@ test('Test display recipes using SuperTest', async () => {
     expect(html).toMatch(recipes[i].meal);
   }
 });
-
-/* Chat test */

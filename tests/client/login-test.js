@@ -25,6 +25,20 @@ function fillForm(driver, id, password) {
   loginBtn.simulate('click');
 }
 
+test('Test can render Login form', () => {
+  const driver = mount(
+    <MemoryRouter>
+      <Login />
+    </MemoryRouter>
+  );
+
+  const forms = driver.find('#userIdInput');
+  expect(forms.length).toEqual(1);
+
+  const btns = driver.find('#loginBtn');
+  expect(btns.length).toEqual(1);
+});
+
 test('Test fail login', async () => {
   overrideFetch(app);
 

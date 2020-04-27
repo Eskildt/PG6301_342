@@ -12,6 +12,7 @@ const Repository = require('./userRepository');
 const app = express();
 const ews = require('express-ws')(app);
 const WS = require('ws');
+//const WsHandler = require('./ws-handler');
 
 if (false) {
   console.log('Using CORS to allow all origins');
@@ -19,6 +20,21 @@ if (false) {
 }
 
 app.use(bodyParser.json());
+
+function init(app) {
+  ews = express_ws(app);
+
+  app.ws('/', function (socket, req) {
+    console.log('Established a new WS connection');
+
+    broadcastCount();
+
+    //close is treated specially
+    socket.on('close', () => {
+      broadcastCount();
+    });
+  });
+}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import HeaderBar from './headerbar';
-import { withRouter } from 'react-router-dom';
+import { withRouter, BrowserRouter } from 'react-router-dom';
 
 export class SignUp extends React.Component {
   constructor(props) {
@@ -92,6 +92,7 @@ export class SignUp extends React.Component {
           userId={this.props.userId}
           updateLoggedInUserId={this.props.updateLoggedInUserId}
         />
+
         <div className='signupArea'>
           <div>
             <p>User Id:</p>
@@ -122,9 +123,9 @@ export class SignUp extends React.Component {
             <div>{confirmMsg}</div>
           </div>
           {error}
-          <div className='btn' onClick={this.doSignUp} id='signUpBtn'>
+          <button className='btn' onClick={this.doSignUp} id='signUpBtn'>
             Sign Up
-          </div>
+          </button>
         </div>
       </div>
     );

@@ -45,39 +45,4 @@ router.get('/api/user', (req, res) => {
   res.status(401).send();
 });
 
-router.post('/api/transfers', (req, res) => {
-  if (!req.user) {
-    res.status(401).send();
-    return;
-  }
-
-  const dto = req.body;
-
-  const from = req.user.id;
-  const to = dto.to;
-  const amount = dto.amount;
-
-  const transferred = Repository.transferMoney(from, to, amount);
-
-  const form = req.is('application/x-www-form-urlencoded');
-
-  if (form) {
-    res.status(302);
-    if (transferred) {
-      res.location('/');
-    } else {
-      res.location('/?error=true');
-    }
-    res.send();
-  } else {
-    if (transferred) {
-      res.status(204);
-    } else {
-      res.status(400);
-    }
-
-    res.send();
-  }
-});
-
 module.exports = router;

@@ -1,13 +1,16 @@
-/*const React = require('react');
+const React = require('react');
 const { mount } = require('enzyme');
+const { MemoryRouter } = require('react-router-dom');
 
-const { overrideFetch, asyncCheckCondition } = require('../mytest-utils');
 const { overrideWebSocket } = require('../mytest-utils-ws');
 
 const { Chat } = require('../../src/client/Chat');
 const { app } = require('../../src/server/app');
 
 const { setUpDomEnvironment } = require('../jest-setup');
+
+const { overrideFetch } = require('../mytest-utils');
+const { asyncCheckCondition } = require('../mytest-utils');
 
 let server;
 let port;
@@ -28,7 +31,11 @@ test('Test new messages', async () => {
   overrideFetch(app);
   overrideWebSocket();
 
-  const driver = mount(<Chat />);
+  const driver = mount(
+    <MemoryRouter>
+      <Chat />
+    </MemoryRouter>
+  );
 
   const msg = 'Hello!';
 
@@ -59,4 +66,4 @@ test('Test new messages', async () => {
   expect(displayedMessage).toBe(true);
 
   driver.unmount();
-});*/
+});

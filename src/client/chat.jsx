@@ -1,6 +1,5 @@
 import React from 'react';
-import { withRouter, Route, BrowserRouter } from 'react-router-dom';
-import { HeaderBar } from './headerbar';
+import { withRouter } from 'react-router-dom';
 
 export class Chat extends React.Component {
   constructor(props) {
@@ -126,40 +125,36 @@ export class Chat extends React.Component {
     }
 
     return (
-      <React.Fragment>
-        <HeaderBar />
-
-        <div className='chatDiv'>
-          <h2>Customer Chat</h2>
-          <div>
-            <p className='inputName'>Your name:</p>
-            <input
-              type='text'
-              className='inputName'
-              value={this.state.name}
-              onChange={this.onNameChange}
-              id='nameInputId'
-            />
-          </div>
-          <br />
-          <div>
-            <p>Your message:</p>
-            <textarea
-              cols='50'
-              rows='5'
-              value={this.state.text}
-              onChange={this.onTextChange}
-              id='msgInputId'
-            />
-          </div>
-          <br />
-
-          <button id='sendBtnId' className='btn send' onClick={this.sendMsg}>
-            Send
-          </button>
-          {messages}
+      <div className='chatDiv'>
+        <h2>Customer Chat</h2>
+        <div>
+          <p className='inputName'>Your name:</p>
+          <input
+            type='text'
+            className='inputName'
+            value={this.state.name}
+            onChange={this.onNameChange}
+            id='nameInputId'
+          />
         </div>
-      </React.Fragment>
+        <br />
+        <div>
+          <p>Your message:</p>
+          <textarea
+            cols='50'
+            rows='5'
+            value={this.state.text}
+            onChange={this.onTextChange}
+            id='msgInputId'
+          />
+        </div>
+        <br />
+
+        <button id='sendBtnId' className='btn send' onClick={this.sendMsg}>
+          Send
+        </button>
+        {messages}
+      </div>
     );
   }
 }

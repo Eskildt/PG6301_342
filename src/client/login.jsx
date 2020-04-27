@@ -104,7 +104,9 @@ export class Login extends React.Component {
               Log In
             </div>
 
-            <Link to={'/signup'}>Register</Link>
+            <button className='btn'>
+              <Link to={'/signup'}>Register</Link>
+            </button>
           </div>
         </div>
       </div>
