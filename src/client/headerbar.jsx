@@ -69,7 +69,7 @@ export class HeaderBar extends React.Component {
 
     return (
       <div className={'headerBar'}>
-        <NavLink className='home btn' to={'/'}>
+        <NavLink className='home btn' to={'/'} id='homeLink'>
           <i className='fas fa-home'></i>
         </NavLink>
 

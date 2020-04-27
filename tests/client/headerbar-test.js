@@ -37,6 +37,20 @@ test('Test logged in', async () => {
   expect(html.includes(userId)).toEqual(true);
 });
 
+let server;
+let port;
+
+beforeAll((done) => {
+  server = app.listen(0, () => {
+    port = server.address().port;
+    done();
+  });
+});
+
+afterAll(() => {
+  server.close();
+});
+
 /*Flaky test, need revisit 
 
 test('Test do logout', async () => {
