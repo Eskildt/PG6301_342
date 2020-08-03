@@ -1,3 +1,5 @@
+//Core code: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/server/routes.js
+
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
@@ -44,5 +46,38 @@ router.get('/api/user', (req, res) => {
 
   res.status(401).send();
 });
+
+router.put("/api/buyCards", (req, res) => {
+
+  const dto = req.body;
+
+  if(!dto.userId){
+    res.status(401).send();
+    return;
+  }
+
+  const from = dto.userId;
+  const amount = dto.amount;
+
+  Repository.buyCards(from, amount);
+  res.send();
+});
+
+router.put("/api/sellCard", (req, res) => {
+
+  const dto = req.body;
+
+  if(!dto.userId){
+    res.status(401).send();
+    return;
+  }
+
+  const from = dto.userId;
+  const amount = dto.amount;
+
+  Repository.sellCards(from, amount);
+  res.send();
+});
+
 
 module.exports = router;

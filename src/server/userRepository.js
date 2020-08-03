@@ -1,3 +1,5 @@
+//Core code: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/server/repository.js
+
 const users = new Map();
 
 function getUser(id) {
@@ -21,12 +23,51 @@ function createUser(id, password) {
 
   const user = {
     id: id,
+    balance: 3000,
     password: password,
   };
+
+
 
   users.set(id, user);
   return true;
 }
+
+  function buyCards(userId, amount){
+
+    const user = getUser(userId);
+
+  if(isNaN(amount) || amount <= 0){
+    return false;
+  }
+
+  if(user === undefined){
+    return false;
+  }
+
+  if(user.balance < amount){
+    return false;
+  }
+  user.balance -=amount;
+  return true;
+}
+
+  function sellCards(userId, amount){
+  const user = getUser(userId);
+
+  if(isNaN(amount) || amount <= 0){
+    return false;
+  }
+
+  if(user === undefined){
+    return false;
+  }
+
+  user.balance +=amount
+  return true;
+}
+
+
 function resetAllUsers() {
   users.clear();
 }
@@ -36,4 +77,6 @@ module.exports = {
   createUser,
   getUser,
   resetAllUsers,
+  buyCards,
+  sellCards
 };

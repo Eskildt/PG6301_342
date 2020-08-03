@@ -1,48 +1,7 @@
-// Origin: shared/mytest-utils.js
+// Core code: shared/mytest-utils.js
 
 const request = require('supertest');
 
-/*
-    Here, we stub away the calls to "fetch", as not available in NodeJS (ie, they
-    are specific to the browser, like alert()).
-
-    A complication here is that fetch() returns a Promise. Once such Promise is resolved,
-    accessing response.json() is itself a function returning another Promise.
-    Here, we resolve these Promises immediately.
- */
-export function stubFetch(
-  // http status to return, eg 200
-  status,
-  //the json payload
-  payload,
-  // an optional function that checks if the inputs in "fetch(url, init)" are valid
-  predicate
-) {
-  //define fetch method at global level, as it is not available on NodeJS
-  global.fetch = (url, init) => {
-    //if defined, crash if the predicate is not satisfied
-    if (predicate) {
-      predicate(url, init);
-    }
-
-    return new Promise((resolve, reject) => {
-      const httpResponse = {
-        status: status,
-        json: () => {
-          return new Promise((res, rej) => {
-            res(payload);
-          });
-        },
-      };
-
-      resolve(httpResponse);
-    });
-  };
-}
-
-/*
-    Override fetch() to make calls to the backend using SuperTest
- */
 export function overrideFetch(app) {
   const agent = request.agent(app);
 
@@ -83,6 +42,35 @@ export function overrideFetch(app) {
             res(payload);
           });
         },
+      };
+
+      resolve(httpResponse);
+    });
+  };
+}
+export function stubFetch(
+    // http status to return, eg 200
+    status,
+    //the json payload
+    payload,
+    // an optional function that checks if the inputs in "fetch(url, init)" are valid
+    predicate) {
+
+  //define fetch method at global level, as it is not available on NodeJS
+  global.fetch = (url, init) => {
+
+    //if defined, crash if the predicate is not satisfied
+    if(predicate) {
+      predicate(url, init);
+    }
+
+    return new Promise((resolve, reject) => {
+
+      const httpResponse = {
+        status: status,
+        json: () => {return new Promise(
+            (res, rej) => {res(payload);}
+        )}
       };
 
       resolve(httpResponse);

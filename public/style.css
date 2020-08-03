@@ -1,12 +1,12 @@
 body {
-  background-color: #87ceeb;
+  background-color: #faf4f4;
   font-family: 'Yanone Kaffeesatz', sans-serif;
   font-size: 20px;
   text-align: center;
 }
 
 h2 {
-  color: #003366;
+  color: #ef962d;
 }
 
 .mainContent {
@@ -18,11 +18,11 @@ h2 {
 }
 
 .btn {
-  background-color: #003366;
+  background-color: #9c5518;
   margin: 2px;
   border: none;
   border-radius: 20%;
-  color: #f8f2ec;
+  color: #ef962d;
   padding: 12px 16px;
   font-size: 16px;
   cursor: pointer;
@@ -160,4 +160,10 @@ td {
 .chatSpace {
   border-style: solid 2px black;
   background-color: white;
+}
+
+.balanceText{
+position: relative;
+  height: 50px;
+  width: 100px;
 }

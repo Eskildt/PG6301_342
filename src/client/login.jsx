@@ -1,3 +1,5 @@
+//Core code from: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/client/login.jsx
+
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import HeaderBar from './headerbar';
