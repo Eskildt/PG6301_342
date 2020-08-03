@@ -1,15 +1,15 @@
+//Core code from: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/client/index.jsx
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Home } from './home';
-import { Create } from './create';
-import { Edit } from './edit';
 import { NotFound } from './not_found';
 
 import Login from './login';
 import SignUp from './signup';
-import { Chat } from './chat';
+import Cards from './cards';
 
 export class App extends React.Component {
   constructor(props) {
@@ -51,8 +51,6 @@ export class App extends React.Component {
                 />
               )}
             />
-            <Route exact path='/create' component={Create} />
-            <Route exact path='/edit' component={Edit} />
             <Route
               exact
               path='/'
@@ -65,15 +63,14 @@ export class App extends React.Component {
               )}
             />
             <Route
-              exact
-              path='/chat'
-              render={(props) => (
-                <Chat
-                  {...props}
-                  userId={this.state.userId}
-                  updateLoggedInUserId={this.updateLoggedInUserId}
-                />
-              )}
+                exact
+                path='/cards'
+                render={(props) => (
+                    <Cards
+                        {...props}
+                        updateLoggedInUserId={this.updateLoggedInUserId}
+                    />
+                )}
             />
 
             <Route component={NotFound} />

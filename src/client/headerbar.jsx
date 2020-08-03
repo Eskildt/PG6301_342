@@ -1,5 +1,7 @@
+//Core code from: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/client/headerbar.jsx
 import React from 'react';
 import { NavLink, Link, withRouter } from 'react-router-dom';
+
 
 export class HeaderBar extends React.Component {
   constructor(props) {
@@ -32,7 +34,7 @@ export class HeaderBar extends React.Component {
   renderLoggedIn(userId) {
     return (
       <div className='header'>
-        <h3 className='notLoggedInMsg'>Welcome Chef {userId}</h3>
+        <h3 className='notLoggedInMsg'>Welcome Hurtstoner {userId}</h3>
 
         <div className='logout btn' onClick={this.doLogout} id='logoutBtnId'>
           Logout
@@ -72,6 +74,10 @@ export class HeaderBar extends React.Component {
         <NavLink className='home btn' to={'/'} id='homeLink'>
           <i className='fas fa-home'></i>
         </NavLink>
+        <NavLink className='home btn' to={'/cards'} id='cardsLink'>
+          Wiki For All Cards
+        </NavLink>
+
 
         {content}
       </div>

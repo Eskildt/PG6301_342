@@ -1,3 +1,5 @@
+//Core code from: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/client/signup.jsx
+
 import React from 'react';
 import HeaderBar from './headerbar';
 import { withRouter, BrowserRouter } from 'react-router-dom';

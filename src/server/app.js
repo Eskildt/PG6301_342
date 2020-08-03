@@ -1,5 +1,7 @@
+//Core code: https://github.com/arcuri82/web_development_and_api_design/blob/master/les08/authentication/src/server/app.js
+
 const express = require('express');
-const repository = require('./recipeRepository');
+const repository = require('./cardsRepository');
 const bodyParser = require('body-parser');
 const path = require('path');
 const LocalStrategy = require('passport-local').Strategy;
@@ -10,9 +12,8 @@ const session = require('express-session');
 const Repository = require('./userRepository');
 
 const app = express();
-const ews = require('express-ws')(app);
+let ews = require('express-ws')(app);
 const WS = require('ws');
-//const WsHandler = require('./ws-handler');
 
 if (false) {
   console.log('Using CORS to allow all origins');
@@ -20,21 +21,6 @@ if (false) {
 }
 
 app.use(bodyParser.json());
-
-function init(app) {
-  ews = express_ws(app);
-
-  app.ws('/', function (socket, req) {
-    console.log('Established a new WS connection');
-
-    broadcastCount();
-
-    //close is treated specially
-    socket.on('close', () => {
-      broadcastCount();
-    });
-  });
-}
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -88,7 +74,7 @@ passport.deserializeUser(function (id, done) {
 app.use(passport.initialize());
 app.use(passport.session());
 
-/*WebSocket */
+//WebSocket
 
 let counter = 0;
 
@@ -137,37 +123,37 @@ app.ws('/', function (ws, req) {
 });
 
 function clearMessages() {
-  //yep, that's how you "clear" an array in JS...
   messages.length = 0;
 }
 
-/* Recipe API */
+//Card API
 
 app.use('/', routes);
 
-app.get('/api/recipes', (req, res) => {
+app.get('/api/cards', (req, res) => {
   const since = req.query['since'];
 
   if (since) {
-    res.json(repository.getAllRecipesSince(since));
+    res.json(repository.getAllCardsSince(since));
   } else {
-    res.json(repository.getAllRecipes());
+    res.json(repository.getAllCards());
   }
 });
 
-app.get('/api/recipes/:id', (req, res) => {
-  const recipe = repository.getRecipe(req.params['id']);
+app.get('/api/cards/:id', (req, res) => {
+  const card = repository.getCard(req.params['id']);
 
-  if (!recipe) {
+  if (!card) {
     res.status(404);
     res.send();
   } else {
-    res.json(recipe);
+    res.json(card);
   }
 });
 
-app.delete('/api/recipes/:id', (req, res) => {
-  const deleted = repository.deleteRecipe(req.params.id);
+app.delete('/api/cards/:id', (req, res) => {
+  console.log(req, res);
+  const deleted = repository.deleteCard(req.params.id);
   if (deleted) {
     res.status(204);
   } else {
@@ -176,24 +162,25 @@ app.delete('/api/recipes/:id', (req, res) => {
   res.send();
 });
 
-app.post('/api/recipes', (req, res) => {
+
+app.post('/api/cards', (req, res) => {
   const dto = req.body;
 
-  const id = repository.createNewRecipe(dto.meal, dto.chef, dto.day);
+  const id = repository.dealRandomCards();
 
   res.status(201);
-  res.header('location', '/api/recipes/' + id);
+  res.header('location', '/api/cards/' + id);
   res.send();
 });
 
-app.put('/api/recipes/:id', (req, res) => {
+app.put('/api/cards/:id', (req, res) => {
   if (req.params.id !== req.body.id) {
     res.status(409);
     res.send();
     return;
   }
 
-  const updated = repository.updateRecipe(req.body);
+  const updated = repository.updateCard(req.body);
 
   if (updated) {
     res.status(204);
